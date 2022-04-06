@@ -4,7 +4,7 @@ pipeline {
     }
     stages {
         stage('Run Tests') {
-            parallel(
+            parallel {
                 stage('Firefox') {
                     steps {
                         sh 'TMP_WORK_DIR=$(mktemp -d) && ls $TMP_WORK_DIR && echo "data" > $TMP_WORK_DIR/data.txt'
@@ -22,7 +22,7 @@ pipeline {
                         sh 'npx playwright test --project=chromium'
                     }
                 }
-            )
+            }
         }
     }
 }
