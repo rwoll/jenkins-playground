@@ -50,6 +50,14 @@ const config: PlaywrightTestConfig = {
     },
 
     {
+      name: 'chromium headful',
+      use: {
+        headless: false,
+        ...devices['Desktop Chrome'],
+      },
+    },
+
+    {
       name: 'firefox',
       use: {
         ...devices['Desktop Firefox'],
@@ -57,39 +65,12 @@ const config: PlaywrightTestConfig = {
     },
 
     {
-      name: 'webkit',
+      name: 'firefox headful',
       use: {
-        ...devices['Desktop Safari'],
+        headless: false,
+        ...devices['Desktop Firefox'],
       },
     },
-
-    /* Test against mobile viewports. */
-    // {
-    //   name: 'Mobile Chrome',
-    //   use: {
-    //     ...devices['Pixel 5'],
-    //   },
-    // },
-    // {
-    //   name: 'Mobile Safari',
-    //   use: {
-    //     ...devices['iPhone 12'],
-    //   },
-    // },
-
-    /* Test against branded browsers. */
-    // {
-    //   name: 'Microsoft Edge',
-    //   use: {
-    //     channel: 'msedge',
-    //   },
-    // },
-    // {
-    //   name: 'Google Chrome',
-    //   use: {
-    //     channel: 'chrome',
-    //   },
-    // },
   ],
 
   /* Folder for test artifacts such as screenshots, videos, traces, etc. */

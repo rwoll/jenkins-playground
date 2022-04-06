@@ -27,8 +27,7 @@ pipeline {
                     steps {
                         sh 'TMP_WORK_DIR=$(mktemp -d) && ls $TMP_WORK_DIR && echo "data" > $TMP_WORK_DIR/data.txt'
                         sh 'npm install'
-                        sh 'HEADED=1 npx playwright screenshot --browser=firefox https://example.com ./out.png'
-                        sh 'HEADED=1 npx playwright test --project=firefox'
+                        sh 'npx playwright test --project="firefox headful"'
                     }
                 }
 
@@ -36,8 +35,7 @@ pipeline {
                     steps {
                         sh 'TMP_WORK_DIR=$(mktemp -d) && ls $TMP_WORK_DIR && echo "data" > $TMP_WORK_DIR/data.txt'
                         sh 'npm install'
-                        sh 'HEADED=1 npx playwright screenshot --browser=chromium https://example.com ./out.png'
-                        sh 'HEADED=1 npx playwright test --project=chromium'
+                        sh 'npx playwright test --project="chromium headful"'
                     }
                 }
             }
