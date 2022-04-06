@@ -3,11 +3,24 @@ pipeline {
         docker { image 'mcr.microsoft.com/playwright:v1.20.2-focal' }
     }
     stages {
-        stage('Test') {
-            steps {
-                sh 'TMP_WORK_DIR=$(mktemp -d) && ls $TMP_WORK_DIR'
-                sh 'npx playwright screenshot --browser=firefox https://example.com ./out.png'
+        parallel(
+            stage('Firefox') {
+                steps {
+                    sh 'TMP_WORK_DIR=$(mktemp -d) && ls $TMP_WORK_DIR && echo "data" > $TMP_WORK_DIR/data.txt'
+                    sh 'npm install'
+                    sh 'npx playwright screenshot --browser=firefox https://example.com ./out.png'
+                    sh 'npx playwright test --project=firefox'
+                }
+            },
+
+            stage('Chromium') {
+                steps {
+                    sh 'TMP_WORK_DIR=$(mktemp -d) && ls $TMP_WORK_DIR && echo "data" > $TMP_WORK_DIR/data.txt'
+                    sh 'npm install'
+                    sh 'npx playwright screenshot --browser=chromium https://example.com ./out.png'
+                    sh 'npx playwright test --project=chromium'
+                }
             }
-        }
+        )
     }
 }
